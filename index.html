@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js"></script>
+  </head>
+
+  <style>
+    #clockContainer {
+  position: relative;
+  height: 30vw;
+  /*to make the height and width responsive*/
+  width: 30vw;
+  background: url(https://media.geeksforgeeks.org/wp-content/uploads/20210302161254/imgonlinecomuaCompressToSizeOmNATjUMFKw-300x300.jpg)
+    no-repeat;
+  /*setting our background image*/
+  background-size: 100%;
+  border-radius: 100%;
+  box-shadow: 0 0 20px rgba(237, 233, 233, 0.5);
+
+}
+
+#hour,
+#minute,
+#second {
+  position: absolute;
+  background: black;
+  border-radius: 10px;
+  transform-origin: bottom;
+}
+
+#hour {
+  width: 1.8%;
+  height: 25%;
+  top: 25%;
+  left: 48.85%;
+  opacity: 0.8;
+}
+
+#minute {
+  width: 1.6%;
+  height: 30%;
+  top: 19%;
+  left: 48.9%;
+  opacity: 0.8;
+}
+
+#second {
+  width: 1%;
+  height: 40%;
+  top: 9%;
+  left: 49.25%;
+  opacity: 0.8;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #282c34;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#digitalClock {
+  color: #61dafb;
+  font-size: 7vw;
+  text-align: center;
+  background: #20232a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgb(0, 0, 0);
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+  </style>
+  <body>
+    <div id="clockContainer">
+      <div id="hour"></div>
+      <div id="minute"></div>
+      <div id="second"></div>
+    </div>
+
+    <div id="digitalClock">
+        <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+      </div>
+  </body>
+  <script >
+    document.addEventListener("DOMContentLoaded", function () {
+  const hourHand = document.getElementById("hour");
+  const minuteHand = document.getElementById("minute");
+  const secondHand = document.getElementById("second");
+
+  function updateClock() {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const minutes = now.getMinutes();
+    const hours = now.getHours();
+
+    const secondsDeg = (seconds / 60) * 360;
+    const minutesDeg = (minutes / 60) * 360 + (seconds / 60) * 6;
+    const hoursDeg = (hours / 12) * 360 + (minutes / 60) * 30;
+
+    secondHand.style.transform = `rotate(${secondsDeg}deg)`;
+    minuteHand.style.transform = `rotate(${minutesDeg}deg)`;
+    hourHand.style.transform = `rotate(${hoursDeg}deg)`;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock(); // Initial call to set the clock immediately
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const hoursSpan = document.getElementById("hours");
+  const minutesSpan = document.getElementById("minutes");
+  const secondsSpan = document.getElementById("seconds");
+
+  function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    hoursSpan.textContent = hours;
+    minutesSpan.textContent = minutes;
+    secondsSpan.textContent = seconds;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock(); // Initial call to set the clock immediately
+});
+
+  </script>
+</html>
